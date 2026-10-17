@@ -151,8 +151,9 @@ Notes:
 
 ## Decision 6: Raspberry Pi 5, Coral waits
 
-**What:** Raspberry Pi 5. **4 GB or 8 GB is not locked** (no wiring or code
-difference; 4 GB is cheaper and enough because training happens elsewhere).
+**What:** Raspberry Pi 5, **8 GB** (decided Oct 16). The RAM can't be upgraded
+later, and the extra room helps with bigger models or the semester 2 drone
+work. It costs roughly $20-40 more than 4 GB (estimate).
 
 **Training vs running (the thing that confused us):**
 - **Training** = teaching the model with thousands of pictures. Heavy work. Done
@@ -160,8 +161,11 @@ difference; 4 GB is cheaper and enough because training happens elsewhere).
 - **Running** = using the finished model on live camera frames. Light work.
   Done by the Pi, by itself, with no laptop needed.
 
-**Coral accelerator:** deferred. It plugs into the Pi (USB or PCIe), so adding
-it later does not change the PCB or the wiring. Decide at P2 (Nov 20 or later).
+**Coral accelerator: PINNED (decided Oct 16).** It plugs into the Pi (USB or
+PCIe), so adding it later does not change the PCB or the wiring. The only two
+things to keep in mind now: (1) the 5 V module for the Pi stays sized for 5 A,
+which already leaves room for the Coral's small extra power draw, and (2) leave
+a little space in the enclosure for it. Revisit at P2 (Nov 20 or later).
 Without it, the Pi's CPU runs the model; this probably meets our 2-5
 detections-per-second goal but is NOT verified. We also need to check Coral
 availability, since that product line is aging.
@@ -186,7 +190,7 @@ yet.
    cheap modules often mislabel their power. Test only on a wall or paper
    target. Never aim at people or mirror-like surfaces.
 3. **Confidence threshold** for firing the laser (decided during P2/P3).
-4. **Pi RAM size** (4 GB vs 8 GB) and **Coral** (see above).
+4. **Coral:** pinned, revisit at P2 (see above).
 5. **Battery: buy vs build** (decided at P3, order in late Nov).
 6. **Overall budget:** about $370 total across the whole project. A stricter
    monthly spending limit applies; ask Aru for the exact number before
