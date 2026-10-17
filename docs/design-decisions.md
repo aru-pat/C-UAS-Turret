@@ -97,6 +97,12 @@ to an ESP32-S3. Nothing else in the design changes.
 - He wanted a hard fallback, so we set the Oct 26 deadline: no motor moving by
   then means switch to ESP32-S3.
 
+**Why Aru chose the carrier-board PCB (his reasoning):** he wanted to lower the
+risk and time cost of soldering and starting up a bare chip, while still doing a
+custom PCB with real soldering. He asked why not use the Nucleo as the whole
+controller, was told he could, and decided to make the Nucleo part of his custom
+board. He made the bare chip optional.
+
 ---
 
 ## Decision 2: Pi and PCB talk over UART serial
@@ -383,12 +389,6 @@ reason: cost.
   surge diode.
 - Slow China orders (if any) are placed early, and a $30 "unknowns" allowance is
   in the BOM.
-
-**Why Aru chose the carrier-board PCB (his reasoning):** he wanted to lower the
-risk and time cost of soldering and starting up a bare chip, while still doing a
-custom PCB with real soldering. He asked why not use the Nucleo as the whole
-controller, was told he could, and decided to make the Nucleo part of his custom
-board. He made the bare chip optional.
 
 **Why the budget is open (his reasoning):** a friend may help fund the project in
 exchange for a resume credit, so he said not to fret too much about the budget.
