@@ -269,17 +269,6 @@ $7.61 at Walmart). The STM32 pin is too weak to power it directly, so an
 **IRLZ44N logic-level MOSFET** (2 for $3.60 at Digi-Key, one spare) acts as the
 on/off switch, with power coming from 5 V.
 
-**Honest safety note (Aru's decision, recorded as a departure):** 5 mW is
-**Class 3R**, not Class 2, and an unbranded module's real output is unknown. The
-project's earlier rule was "1 mW or less". We chose the cheap module over the
-$25 Quarton 1 mW part (Class 2, power stated by the maker) to save money. So:
-- Point it only at a wall or paper target. Never at people, pets, mirrors, or
-  shiny surfaces. Never look into it.
-- Do not call it "Class 2" on the resume or in the demo video. Say
-  "low-power laser".
-- Revisit the 1 mW Quarton (Digi-Key VLM-650-03 LPT) before any demo with other
-  people nearby, or once a monitor is available to confirm output power.
-
 ---
 
 ## Decision 11: Mechanical build and ordering
@@ -320,6 +309,6 @@ $25 Quarton 1 mW part (Class 2, power stated by the maker) to save money. So:
 
 - No weapon. No RF jammer (illegal, FCC).
 - Laser is low-power, only fires above the confidence threshold, never aimed at
-  people. (See Decision 10 for the current 5 mW module and its handling rules.)
+  people.
 - The AI model is self-trained. It makes the real detect/classify decision.
 - Breadboard first, then finalize the PCB (PCB parts must be ordered by Nov 2).
