@@ -85,6 +85,18 @@ instead of 10-15 hours with ST's own tools.
 **Escape hatch:** if the Nucleo is not driving a motor by **Oct 26**, we switch
 to an ESP32-S3. Nothing else in the design changes.
 
+**Why Aru chose STM32 over ESP32 (his reasoning):**
+- He asked for "whichever the industry or resume people will like better".
+- His main limit is time (10-12 hours a week plus classes and an internship). He
+  said he did not want to spend an insane amount of time troubleshooting, and
+  that if STM32 cost only about 5 extra hours he would take it. That is why the
+  code is written Arduino-style.
+- He asked how much more STM32 costs than ESP32 and whether employers care. The
+  answer was: a little more money, a steeper learning curve, and yes, STM32
+  reads as more serious for robotics and motor work.
+- He wanted a hard fallback, so we set the Oct 26 deadline: no motor moving by
+  then means switch to ESP32-S3.
+
 ---
 
 ## Decision 2: Pi and PCB talk over UART serial
@@ -99,6 +111,10 @@ every Pi and STM32, and is easy to debug with a laptop.
 
 **Alternatives we rejected:** USB cable (needs extra USB circuitry on the PCB),
 I2C (motor electrical noise can corrupt it), SPI (overkill).
+
+**Why Aru chose UART (his reasoning):** he wanted the simplest connection that
+works and is easy to debug. He was also confused at first about what the Pi does
+versus the laptop, which is why this doc explains training vs running.
 
 ---
 
@@ -124,6 +140,15 @@ it got there. If it is bumped, it loses its place without knowing. A
 closed-loop stepper has a small position sensor (an encoder) so the driver can
 check and fix its position. Same motor, plus feedback.
 
+**Why Aru chose 12 V with a 24 V hedge (his reasoning):**
+- He first asked how much slower 12 V is than 24 V, and said that if it is not
+  that bad, 12 V is fine. He also asked for a real number for the extra cost of
+  24 V (the battery needs twice the cells, roughly $40-70 more).
+- Then he worried that a turret has to turn the camera fast to track a moving
+  target. So he liked the idea of drivers that work on both 12 V and 24 V: run
+  12 V now, and keep the option to go to 24 V without a new board.
+- Budget was also a factor: he said he cannot spend $300 in one month.
+
 ---
 
 ## Decision 4: The motors are BIGTREETECH S42C closed-loop kits (decided Oct 17)
@@ -146,6 +171,16 @@ BOM only as a not-counted alternative; they are open-loop, which breaks the spec
   the board.
 - Some reviewers report dead units. Amazon returns are free for 30 days, so test
   both on arrival.
+
+**Why Aru chose these motors (his reasoning):**
+- Closed-loop was in the original spec because backlash (slop) and lost steps
+  were identified as a top failure risk for a fast-tracking turret.
+- He wants to start building as soon as possible: choose motors now so he can
+  start the CAD for the shell and camera mount, the breadboard wiring, and
+  model training.
+- He did not fully trust the first source and wanted each part checked one by
+  one, with listings he finds himself.
+- He wanted every part as its own line with its own link, nothing bundled.
 
 ---
 
@@ -176,6 +211,12 @@ good). Option B is a generic AliExpress 5 V / 5 A board ($5.24, unproven, and th
 "5 A" claim is doubtful). The two have different sizes, so this must be decided
 before the PCB layout is final. Revisit about Oct 24.
 
+**Why Aru chose to have the PCB power the Pi (his reasoning):** he asked which
+option is more time-efficient and looks cleaner and more professional. He also
+pointed out that Prototype 2 needs the PCB anyway, and that the PCB is ordered
+as early as possible. The wall-supply safety net in Prototype 2 came from the
+same thinking: a bug in a brand-new board should not ruin the checkpoint.
+
 ---
 
 ## Decision 6: Power input connector on the PCB (decided Oct 17)
@@ -198,6 +239,12 @@ from vibration on a moving turret. Barrel jack alone does not suit a battery.
 - Never connect both at once. A label on the board says which one is live.
 - The fuse sits right at the power entry, before anything else.
 - Optional: a small reverse-polarity protection part as a cheap safety net.
+
+**Why Aru chose option D (his reasoning):** he asked for the pros and cons of the
+connector choices, then picked D. A barrel jack and an XT60 footprint on the same
+board means the wall adapter works today, a battery works later, and neither can
+be plugged in backwards. The board is ordered once, so power entry has to be
+right the first time.
 
 ---
 
@@ -223,6 +270,18 @@ Notes:
 - The turret should draw about 45 W on average and about 87 W at peak (a
   deliberately cautious guess).
 
+**Why Aru chose this power plan (his reasoning):**
+- "Can we just power this with a simple laptop charger for now and do battery
+  later?" The battery set was expensive and he cannot spend $300 in one month.
+- He asked why he needs a fire box and rejected it as overkill. Charging rules
+  replace it.
+- He chose to leave the battery out for now and add it as an optional item once
+  he is committed to the project.
+- He asked what a fuse is and why it is needed, and chose to skip the online
+  store for the fuse parts because of shipping, buying locally or from the ECE
+  shop instead.
+- He plans to check the Purdue ECE shop on Monday for free parts before ordering.
+
 ---
 
 ## Decision 8: Raspberry Pi 5 8 GB, bought at P2; Coral waits
@@ -243,6 +302,14 @@ leave a little space in the enclosure. Decide at P2 after measuring the model on
 the Pi alone. Without it the Pi's CPU runs the model; this probably meets our
 2-5 detections-per-second goal but is NOT verified. Its price swings widely
 ($89-$200) and the Newark listing is unusable (deliveries from Jan 2027).
+
+**Why Aru chose the 8 GB Pi and pinned the Coral (his reasoning):**
+- He said he did not want the 4 GB Pi, even to save money, because the RAM cannot
+  be upgraded later and the semester 2 drone work will want room.
+- He asked what he loses without the Coral and why a second chip is needed if
+  the Pi is already there. He decided that if the Coral can be added later with
+  no change to the wiring or PCB, it should simply be pinned and decided at P2.
+- He decided not to buy the Pi now.
 
 ---
 
@@ -274,6 +341,15 @@ holder.
 project continues, we upgrade, which means retaking the main training dataset.
 So collect only a small starter set on this camera to prove the pipeline.
 
+**Why Aru chose a USB camera now (his reasoning):**
+- He wants to train on the same camera the turret will use, because a different
+  camera changes the data quality and the training.
+- He does not want to redo the CAD for the camera mount later.
+- He will not buy the Pi now but needs the camera now, so it has to work on the
+  laptop and later on the Pi. He set a $27 ceiling and chose the Arducam after
+  comparing it with an InnoMaker board.
+- He plans to take it out of its stand and mount just the case for full control.
+
 ---
 
 ## Decision 10: Laser is IN Prototype 1; cheap 5 mW module chosen (decided Oct 17)
@@ -286,6 +362,12 @@ The laser is a cheap **AREALER 5 mW, 650 nm, 5 V red dot module** (4-pack,
 $7.61 at Walmart). The STM32 pin is too weak to power it directly, so an
 **IRLZ44N logic-level MOSFET** (2 for $3.60 at Digi-Key, one spare) acts as the
 on/off switch, with power coming from 5 V.
+
+**Why Aru chose this laser setup (his reasoning):** he wants to see the laser fire
+when the model detects a hand in Prototype 1. He chose the cheap 4-pack over the
+$25 Quarton to save money and told me not to worry about the maker's guarantee.
+He approved the $1.80 MOSFET and the $1.00 camera-cable swaps for the same
+reason: cost.
 
 ---
 
@@ -301,6 +383,17 @@ on/off switch, with power coming from 5 V.
   surge diode.
 - Slow China orders (if any) are placed early, and a $30 "unknowns" allowance is
   in the BOM.
+
+**Why Aru chose the carrier-board PCB (his reasoning):** he wanted to lower the
+risk and time cost of soldering and starting up a bare chip, while still doing a
+custom PCB with real soldering. He asked why not use the Nucleo as the whole
+controller, was told he could, and decided to make the Nucleo part of his custom
+board. He made the bare chip optional.
+
+**Why the budget is open (his reasoning):** a friend may help fund the project in
+exchange for a resume credit, so he said not to fret too much about the budget.
+He also asked to budget for China orders and for things he will only discover
+while building.
 
 ---
 
