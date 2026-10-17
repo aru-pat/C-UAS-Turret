@@ -34,11 +34,11 @@ does the moving.
              decides "lock on"
 ```
 
-**Chip vs board (a common mix-up):** the STM32 is the *chip*. The PCB is the
-green *board* it is soldered onto, with copper traces that connect the chip to
-the motors, laser, power and Pi. The **Nucleo** we use in Prototype 1 is the same
-chip already mounted on a small ready-made board, so we can test code before our
-own board exists. In Prototype 3 our PCB replaces the Nucleo.
+**Chip vs board (a common mix-up):** the STM32 is the *chip*. The **Nucleo** is
+that chip already mounted on a small ready-made board. Our custom PCB is a
+**carrier board**: the Nucleo plugs into it, and its copper traces connect the
+Nucleo to the motors, laser, power and Pi. So the same Nucleo we use in
+Prototype 1 stays in the finished turret.
 
 ---
 
@@ -46,8 +46,26 @@ own board exists. In Prototype 3 our PCB replaces the Nucleo.
 
 **What:** STM32G474. For Prototype 1 we use the **Nucleo-G474RE** dev board
 (a ready-made board with the chip plus a USB programmer built in, about $20 at
-Digi-Key). On the final PCB we solder the bare chip (STM32G474RET6, 64-pin,
-about $10.70).
+Digi-Key).
+
+**Updated Oct 17: carrier-board PCB.** The final custom PCB is a **carrier
+board that the Nucleo plugs into** (decided Oct 17), not a board with the bare
+chip soldered on. The PCB still carries the real design work (connectors, power
+input, fuse, surge diode, laser MOSFET, 5 V module socket, motor connectors),
+and there is still soldering. The chip stays on the Nucleo, which is already
+known to work. That removes fine-pitch chip soldering, chip start-up problems and
+the extra programming header. The bare STM32G474RET6 (64-pin, about $10.70) and
+a chip-down board remain in the BOM as an **optional, not-counted** upgrade.
+
+**Resume wording:** say "custom carrier PCB for an STM32 Nucleo". Do not say
+Aru designed his own microcontroller board.
+
+**Pi link option:** the Pi can talk to the Nucleo over one USB cable into its
+programmer port (it shows up as a serial port), instead of separate TX/RX/GND
+wires. Choose one when designing the board.
+
+**One power rule:** the Nucleo and the carrier board must never both power the
+same pin. Pick a single power path when laying out the board.
 
 **Changed from the earlier plan:** this doc used to say STM32G431 / Nucleo-G431RB.
 That board is out of stock with a 99-week lead time, so we moved to the G474 in
