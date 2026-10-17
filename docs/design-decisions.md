@@ -202,7 +202,7 @@ BOM only as a not-counted alternative; they are open-loop, which breaks the spec
 product looks like. It also matches the original plan that the PCB handles
 "power distribution".
 
-**Because the PCB order only happens once** (it must go out by Nov 2), this
+**Because the PCB order only happens once** (target Oct 30, hard limit Nov 1, because exams start Nov 2), this
 power path has to be in the first design.
 
 **Safety net:** the PCB is brand new, so in Prototype 2 the Pi runs from its
@@ -295,7 +295,7 @@ Notes:
 
 **What:** Raspberry Pi 5, **8 GB** (decided Oct 16). The RAM can't be upgraded
 later. We do **not** buy the Pi now (decided Oct 17): the Pi, power supply and
-cooler are P2 purchases, ordered by about Nov 13.
+cooler are P2 purchases, ordered by Nov 10.
 
 **Training vs running (the thing that confused us):**
 - **Training** = teaching the model with thousands of pictures. Heavy work. Done
@@ -399,14 +399,14 @@ budget for China orders and for things I will only discover while building.
 ## Still open (not decided)
 
 1. **5 V module for the Pi:** Pololu vs AliExpress. Revisit about Oct 24, and it
-   must be settled before the PCB layout (Oct 30).
+   must be settled before the PCB layout starts. Target: connector and 5 V module settled by Oct 24, board design finished and ordered Oct 30.
 2. **YOLO fine-tune vs from-scratch network.** Parked for now. Note the project
    rule says "self-trained, not pretrained". Fine-tuning a small YOLO on our own
    photos is the practical route; training a tiny network from scratch is a
    stronger story but riskier for the Dec 12 deadline. Resume wording must
    match whichever we do.
 3. **Confidence threshold** for firing the laser (decided during P2/P3).
-4. **Coral:** pinned, revisit at P2 (about Nov 24).
+4. **Coral:** pinned, revisit at P2 (decide Nov 23).
 5. **Battery: buy vs build** (decided in late November).
 6. **Friend's funding and role.** A friend may help fund the project in exchange
    for a resume credit. The role split and who keeps the hardware are not
@@ -421,4 +421,4 @@ budget for China orders and for things I will only discover while building.
 - Laser is low-power, only fires above the confidence threshold, never aimed at
   people.
 - The AI model is self-trained. It makes the real detect/classify decision.
-- Breadboard first, then finalize the PCB (PCB parts must be ordered by Nov 2).
+- Breadboard first, then finalize the PCB (PCB and PCB parts ordered by Nov 1 at the latest, target Oct 30).
