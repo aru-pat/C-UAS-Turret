@@ -85,6 +85,14 @@ StepperOnline closed-loop driver we checked had a 24 V minimum). So we are
 choosing the hobby-grade **MKS SERVO42-style** closed-loop drivers, which accept
 12-24 V and accept simple step/direction signals. See "Still open".
 
+**The 24 V hedge (agreed Oct 16):** a turret has to track a moving target, so
+we don't want to be stuck if 12 V feels slow. The drivers accept 12-24 V, so:
+1. The PCB is built with parts that can handle 24 V (capacitors, fuse,
+   connectors, traces), which costs almost nothing extra.
+2. We run at 12 V now.
+3. If the turret feels slow in P2, upgrading means swapping the battery and one
+   small protection diode (SMCJ15A -> a 24 V-class one). No new board.
+
 **What "closed-loop" means:** a normal stepper motor moves N steps and *assumes*
 it got there. If it is bumped, it loses its place without knowing. A
 closed-loop stepper has a small position sensor (an encoder) so the driver can
@@ -170,8 +178,13 @@ yet.
    closed-loop drivers (12-24 V) plus NEMA 17 motors, about $70-130 for two
    axes. Need specific listings, seller checks and delivery dates, because
    delivery must land before Nov 2 and many are shipped from China.
-2. **Laser in P1 or later?** Still to discuss. Any laser stays low-power
-   (Class 2, under 5 mW) and is never aimed at people.
+2. **Laser is IN Prototype 1 (decided Oct 16).** The laptop webcam runs the
+   hand-detection model. When it is confident, the laptop sends one message over
+   USB serial to the STM32, which switches the laser on. No Pi needed in P1.
+   Safety: true Class 2 means 1 mW or less (5 mW is Class 3R, not Class 2).
+   Buy a red-dot module from a reputable seller that states under 1 mW, since
+   cheap modules often mislabel their power. Test only on a wall or paper
+   target. Never aim at people or mirror-like surfaces.
 3. **Confidence threshold** for firing the laser (decided during P2/P3).
 4. **Pi RAM size** (4 GB vs 8 GB) and **Coral** (see above).
 5. **Battery: buy vs build** (decided at P3, order in late Nov).
@@ -182,7 +195,7 @@ yet.
 ## Hard rules that do not change
 
 - No weapon. No RF jammer (illegal, FCC).
-- Laser is low-power, only fires above the confidence threshold, never aimed at
-  people.
+- Laser is low-power (1 mW or less), only fires above the confidence threshold,
+  never aimed at people.
 - The AI model is self-trained. It makes the real detect/classify decision.
 - Breadboard first, then finalize the PCB (PCB parts must be ordered by Nov 2).
