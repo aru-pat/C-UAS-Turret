@@ -11,9 +11,9 @@ low-power laser as a lock-on indicator.
 ## Must have
 - Pan-tilt motors, controlled by a **custom PCB** (a carrier board that an
   STM32 Nucleo plugs into)
-- **Self-trained** neural network (not pretrained, not color-threshold-only).
-  Open question: fine-tune a small YOLO on my own photos, or train a small
-  network from scratch. Parked for now; resume wording must match whichever I do.
+- **Self-trained** neural network (not color-threshold-only): fine-tune a small
+  pretrained YOLO-nano class model on my own drone data. Resume wording: "fine-tuned
+  a pretrained model", not "built from scratch". Details are in "AI requirements".
 - Classical CV for fast tracking between AI checks (AI about 2-5 Hz, CV about
   30 Hz or more)
 - Laser activates only above a confidence threshold
