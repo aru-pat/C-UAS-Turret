@@ -1,6 +1,6 @@
 # Counter-UAS Turret — Project requirements (Semester 1)
 
-Last updated: Oct 17, 2026
+Last updated: Oct 23, 2026
 The reasoning behind each choice is in `design-decisions.md`. Parts, links, prices
 and order dates are in `turret_bom.xlsx`.
 
@@ -53,6 +53,42 @@ low-power laser as a lock-on indicator.
   supply as a safety net.
 - **Laser:** cheap 5 mW 650 nm red dot module switched by a logic-level MOSFET,
   in Prototype 1 so I can see it fire on detection.
+
+## AI requirements
+
+**Must have**
+- Detector: fine-tune a small pretrained YOLO-nano class model on my own drone data.
+- Dataset: collect and label it with the final Arducam, and split it by clip into
+  train, validation and test.
+- Evaluation: report precision, recall, mAP and false lock-ons on clips the model
+  never saw.
+- Failure analysis: find at least one failure (such as backlight), add targeted
+  data, retrain, and record the before and after numbers.
+- Edge deployment: export the model, run it on the Raspberry Pi 5, and measure
+  latency and FPS.
+- Quantization: convert to INT8 and compare accuracy and latency against the
+  unquantized model.
+- Hybrid loop: the detector runs at about 2-5 Hz, and an OpenCV tracker (KCF)
+  runs at about 30 Hz or more between checks.
+- Experiment log: record the date, dataset size, settings and metrics for every run.
+
+**Should have**
+- Data-size experiment: plot accuracy against dataset size.
+- Augmentation experiment: compare accuracy with and without augmentation.
+- Pretrained vs random start: train the same model both ways on the same data and
+  compare.
+- Coral decision: measure the Pi alone first, then decide on Nov 23.
+
+**Stretch goals**
+- Classifier: train a tiny CNN from scratch on cropped detector boxes, compare it
+  with a pretrained small model, and use it to confirm detections. Only if the
+  detector is done by about Dec 1.
+- Negative data: film birds, kites and other objects for the classifier and to cut
+  false lock-ons.
+
+**Won't have**
+- A new detector architecture designed from scratch.
+- A demo that depends on the classifier.
 
 ## Tools and access
 - 3D printer available (pan-tilt frame and camera holder are printed)
