@@ -1,6 +1,6 @@
 # Counter-UAS Turret — Project requirements (Semester 1)
 
-Last updated: Oct 23, 2026
+Last updated: Oct 24, 2026
 The reasoning behind each choice is in `design-decisions.md`. Parts, links, prices
 and order dates are in `turret_bom.xlsx`.
 
@@ -57,9 +57,14 @@ low-power laser as a lock-on indicator.
 ## AI requirements
 
 **Must have**
-- Detector: fine-tune a small pretrained YOLO-nano class model on my own drone data.
-- Dataset: collect and label it with the final Arducam, and split it by clip into
-  train, validation and test.
+- Detector: fine-tune a small pretrained YOLO-nano class model on drone data.
+  Which exact model is still being researched.
+- Starting data: use a public drone dataset (Kaggle) to train a first model and get
+  familiar with the pipeline. Check each dataset's license and spot-check its box
+  quality before using it.
+- Own data: collect and label footage in the PURT hangar with the final Arducam.
+  This is the test set (clips the model never trained on), and it is added to
+  training later. Split by clip into train, validation and test.
 - Evaluation: report precision, recall, mAP and false lock-ons on clips the model
   never saw.
 - Failure analysis: find at least one failure (such as backlight), add targeted
