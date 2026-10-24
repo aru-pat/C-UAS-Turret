@@ -11,9 +11,10 @@ low-power laser as a lock-on indicator.
 ## Must have
 - Pan-tilt motors, controlled by a **custom PCB** (a carrier board that an
   STM32 Nucleo plugs into)
-- **Self-trained** neural network (not color-threshold-only): fine-tune a small
-  pretrained YOLO-nano class model on my own drone data. Resume wording: "fine-tuned
-  a pretrained model", not "built from scratch". Details are in "AI requirements".
+- **Self-trained** neural network (not color-threshold-only): a small YOLO-nano
+  class detector trained two ways (from scratch and fine-tuned from pretrained
+  weights) and benchmarked against each other. Resume wording must say which one
+  ships and how it was trained. Details are in "AI requirements".
 - Classical CV for fast tracking between AI checks (AI about 2-5 Hz, CV about
   30 Hz or more)
 - Laser activates only above a confidence threshold
@@ -57,8 +58,12 @@ low-power laser as a lock-on indicator.
 ## AI requirements
 
 **Must have**
-- Detector: fine-tune a small pretrained YOLO-nano class model on drone data.
-  Which exact model is still being researched.
+- Two detectors, same small YOLO-nano class architecture, same data: (A) trained
+  from scratch with random starting weights (not pretrained), and (B) a pretrained
+  model fine-tuned on my data. Benchmark A against B on the same held-out test
+  clips and ship whichever scores better. The model must run on the Raspberry Pi 5
+  and train on my laptop (HP Victus, RTX GPU, Intel i5). Which exact model is still
+  being researched.
 - Starting data: use a public drone dataset (Kaggle) to train a first model and get
   familiar with the pipeline. Check each dataset's license and spot-check its box
   quality before using it.
@@ -80,8 +85,6 @@ low-power laser as a lock-on indicator.
 **Should have**
 - Data-size experiment: plot accuracy against dataset size.
 - Augmentation experiment: compare accuracy with and without augmentation.
-- Pretrained vs random start: train the same model both ways on the same data and
-  compare.
 - Coral decision: measure the Pi alone first, then decide on Nov 23.
 
 **Stretch goals**
