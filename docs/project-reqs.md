@@ -5,8 +5,8 @@ The reasoning behind each choice is in `design-decisions.md`. Parts, links, pric
 and order dates are in `turret_bom.xlsx`.
 
 ## Goal
-Autonomous turret detects a hand (a drone later), tracks it, and fires a
-low-power laser as a lock-on indicator.
+Autonomous turret detects a drone, tracks it, and fires a low-power laser as a
+lock-on indicator.
 
 ## Must have
 - Pan-tilt motors, controlled by a **custom PCB** (a carrier board that an

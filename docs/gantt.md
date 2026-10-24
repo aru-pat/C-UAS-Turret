@@ -4,7 +4,7 @@ Last updated: Oct 17, 2026
 
 | Window | Dates | Load | Work |
 |---|---|---|---|
-| A | Oct 16 – Nov 2 | Full | Prototype 1 (breadboard motors + hand-detection model + laser) and design/order the custom PCB |
+| A | Oct 16 – Nov 2 | Full | Prototype 1 (breadboard motors + drone-detection model + laser) and design/order the custom PCB |
 | B | Nov 2 – Nov 20 | Exams, near-zero | No build work. PCB fab ships passively. Order Pi parts by Nov 10. |
 | C | Nov 20 – Dec 7 | Full (incl. Thanksgiving) | Checkpoint → Prototype 2 → Prototype 3 |
 | D | Dec 7 – Dec 11 | Finals, near-zero | Demo video + writeup only. No new builds. |

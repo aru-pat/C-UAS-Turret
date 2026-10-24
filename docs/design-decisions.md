@@ -1,6 +1,6 @@
 # Design Decisions (plain-language version)
 
-Last updated: Oct 17, 2026
+Last updated: Oct 23, 2026
 
 This file explains **what we decided, why, and what is still open**.
 It is written so someone who has never built a robot can follow it.
@@ -18,7 +18,7 @@ BOM spreadsheet (`turret_bom.xlsx`). This file is the reasoning behind it.
 The turret has two "brains".
 
 - **Brain 1: the Raspberry Pi 5.** It looks through the camera, runs our
-  self-trained AI model to answer "is there a hand (later a drone) and where?",
+  self-trained AI model to answer "is there a drone and where?",
   and decides when the target is locked.
 - **Brain 2: the STM32 chip on our custom PCB.** It does exactly what the Pi
   tells it: send the right pulses to the two motors, and switch the laser.
@@ -361,7 +361,7 @@ So collect only a small starter set on this camera to prove the pipeline.
 
 ## Decision 10: Laser is IN Prototype 1; cheap 5 mW module chosen (decided Oct 17)
 
-**What:** In P1 the laptop runs the hand-detection model on frames from the
+**What:** In P1 the laptop runs the drone-detection model on frames from the
 Arducam USB camera. When it is confident, the laptop sends one message over USB
 serial to the STM32, which switches the laser on. No Pi needed in P1.
 
@@ -371,7 +371,7 @@ $7.61 at Walmart). The STM32 pin is too weak to power it directly, so an
 on/off switch, with power coming from 5 V.
 
 **Why I chose this laser setup:** I want to see the laser fire when the model
-detects a hand in Prototype 1. I chose the cheap 4-pack over the $25 Quarton to
+detects a drone in Prototype 1. I chose the cheap 4-pack over the $25 Quarton to
 save money and said not to worry about the maker's guarantee. I approved the
 $1.80 MOSFET and the $1.00 camera-cable swaps for the same reason: cost.
 
