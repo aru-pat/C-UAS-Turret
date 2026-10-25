@@ -1,0 +1,16 @@
+# Raw media and generated data are big/binary — keep them out of git.
+# The clip LOG (clips.csv) and labels ARE tracked (small, text, valuable).
+#
+# We ignore the CONTENTS of these dirs but keep the dirs themselves (via the
+# .gitkeep files) so the pipeline always has somewhere to write. Note: you
+# cannot un-ignore a file inside a fully-ignored directory, so we ignore
+# contents with `dir/*` and then re-include the .gitkeep.
+
+raw_clips/*
+!raw_clips/.gitkeep
+
+frames/*
+!frames/.gitkeep
+
+dataset/*
+!dataset/.gitkeep
