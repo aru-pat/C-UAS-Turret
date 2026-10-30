@@ -1,6 +1,6 @@
 # Design Decisions (plain-language version)
 
-Last updated: Oct 23, 2026
+Last updated: Oct 29, 2026
 
 This file explains **what we decided, why, and what is still open**.
 It is written so someone who has never built a robot can follow it.
@@ -42,11 +42,22 @@ Prototype 1 stays in the finished turret.
 
 ---
 
-## Decision 1: The motor brain is an STM32G474 (not an ESP32)
+## Decision 1: The motor brain is an STM32 on a Nucleo (not an ESP32)
 
-**What:** STM32G474. For Prototype 1 we use the **Nucleo-G474RE** dev board
-(a ready-made board with the chip plus a USB programmer built in, about $20 at
-Digi-Key).
+**Updated Oct 29:** Prototype 1 runs on the **Nucleo-144 STM32F746ZG** that I
+borrowed from the Purdue ECE shop (a loan: it goes back). The **NUCLEO-G474RE**
+below is now only an optional buy, in case the shop wants its board back before
+Dec 12. The code is Arduino-style or ST's own tools, so it carries over between
+the two. The carrier PCB is designed so a Nucleo plugs in (see Decision 13).
+I dropped the Oct 26 ESP32 fallback date (I said not to track it).
+
+**Why I chose to use the loan board:** it was already in my hands and free, and
+the G474RE was only a hedge against an out-of-stock board. Using what I have lets
+me start on the code now.
+
+**What (original plan):** STM32G474. For Prototype 1 we planned the
+**Nucleo-G474RE** dev board (a ready-made board with the chip plus a USB
+programmer built in, about $20 at Digi-Key).
 
 **Updated Oct 17: carrier-board PCB.** The final custom PCB is a **carrier
 board that the Nucleo plugs into** (decided Oct 17), not a board with the bare
@@ -165,18 +176,30 @@ sensor in one unit, so there is nothing to match up. The STM32 only sends simple
 step and direction pulses.
 
 **Why:** we want closed-loop (backlash was named as a top failure risk), and
-this is the cheapest hobby-grade closed-loop kit that arrives before our Oct 26
-check. Plain steppers plus separate drivers (about $50 for two axes) stay in the
+this is the cheapest hobby-grade closed-loop kit that arrives in time. Plain steppers plus separate drivers (about $50 for two axes) stay in the
 BOM only as a not-counted alternative; they are open-loop, which breaks the spec.
 
-**Honest unknowns:**
-- The Amazon page does not state the voltage. BTT's V1.0 manual rates the driver
-  at 1.65 A at 12 V. **First power-up is on a bench supply at 12 V with about a
-  1 A current limit.**
-- The pinout in the V1.0 manual may differ on V1.1. Read the labels printed on
-  the board.
-- Some reviewers report dead units. Amazon returns are free for 30 days, so test
-  both on arrival.
+**Bring-up results (Oct 25-28, measured on the bench):** both kits power up and
+calibrate. Full details and the pin table are in `s42c-bringup-tests.md`.
+
+| Fact | Measured / confirmed |
+|---|---|
+| Motor power (VM) | 12 V. Vendor page says 12-24 V. 24 mA idle, about 59 mA enabled and stepping with no load |
+| Enable (EN) | Active-low. Open = motor off, tied to GND = motor on. Open means "off" is a good fail-safe |
+| Step (STEP) | One step per rising edge, 3.3 V logic works. 100 Hz tested |
+| Direction (DIR) | Open = one way, tied to GND = the other way |
+| Microstep | Default 1/16: about 3,136 pulses per turn measured (3,200 expected), about 8.9 pulses per degree |
+| 6-pin control plug | Pin 1 VM, 2 NC (leave open), 3 GND, 4 EN, 5 STEP, 6 DIR |
+| Laser switch | IRLU024N, gate through 220 ohm, 10 kohm pulldown, laser draws 25 mA at 5 V. 3.3 V gate = on |
+
+**Still to measure:** both motors' current under load on the real 12 V adapter,
+100 back-and-forth moves, and the Nucleo driving STEP/DIR/EN.
+
+**Caution from the manual:** "do not turn the motor by hand after power on".
+
+**Honest unknowns (older notes, now mostly answered):**
+- Some reviewers report dead units. Amazon returns are free for 30 days; both of
+  my kits worked.
 
 **Why I chose these motors:**
 - Closed-loop was in the original spec because backlash (slop) and lost steps
@@ -212,10 +235,23 @@ after we test the board and trust it.
 **Noise note:** motors create electrical noise that can reset a Pi. The Pi's
 5 V path gets its own capacitors and short, thick traces to keep it clean.
 
+**Updated Oct 29: one 12 V input feeds everything ("Option 1").** There is a
+single power input. 12 V goes to the motors, and a buck converter (a switching
+step-down module) makes 5 V for the Pi. The laser uses a small 5 V line from the
+same converter. The other two ideas were: Option 2, the Pi on its own wall
+supply (works, but two cables and less "one product"), and Option 3, designing my
+own converter chip circuit (6-12 extra hours, not for this deadline). Parts that
+protect and clean the power are in Decision 12.
+
+**Why I chose Option 1:** I want one supply and some real power filtering so I
+learn it, and it reads best on a resume. Option 3 would eat time I need for the
+AI model and the CAD.
+
 **Still open: which 5 V module.** Option A is the Pololu D24V50F5 ($32.95, known
 good). Option B is a generic AliExpress 5 V / 5 A board ($5.24, unproven, and the
 "5 A" claim is doubtful). The two have different sizes, so this must be decided
-before the PCB layout is final. Revisit about Oct 24.
+before the PCB layout is final. I lean toward A (it is the one I can trust to run
+the Pi), but I have not confirmed it yet.
 
 **Why I chose to have the PCB power the Pi:** I asked which option is more
 time-efficient and looks cleaner and more professional. I also pointed out that
@@ -396,10 +432,52 @@ budget for China orders and for things I will only discover while building.
 
 ---
 
+## Decision 12: Power protection and filtering on the PCB (decided Oct 29)
+
+Goal: the board survives mistakes and motor noise, and I learn how real power
+boards do it. Parts in order, from the power input toward the loads:
+
+| Part | What it does (plain words) | Why it is there |
+|---|---|---|
+| XT60 connector | The plug for the 12 V source (battery or adapter lead) | Built for high current, hard to plug in backwards. **Kept.** |
+| Fuse (5 A for P1, 15 A final) | A thin wire that melts if too much current flows | Stops a short from starting a fire |
+| Reverse-polarity protection | A diode or a P-type MOSFET that blocks power if + and - are swapped | A swapped plug would otherwise destroy the chips |
+| TVS diode (SMCJ15A) | Clamps sudden voltage spikes, like a pressure-relief valve | Motors and cables make spikes that can pass 15 V |
+| Bulk capacitor (100-1000 uF) | A small tank of charge close to the motor drivers | Motors pull current in bursts; the tank keeps the voltage steady |
+| Buck module (Pololu) | Efficiently turns 12 V into 5 V | The Pi needs 5 V at up to about 5 A |
+| Ferrite bead and small capacitors on the 5 V line | Block fast electrical noise from reaching the Pi | Motor noise can reset a Pi |
+
+**Why a buck and not a linear regulator:** a linear regulator burns the
+difference as heat: (12 V - 5 V) x current. At 3 A that is 21 W, which would melt
+it. A buck converter wastes only about 5-10 percent. A tiny linear regulator is
+fine for small jobs (the laser at 25 mA, or 3.3 V logic).
+
+**Why I chose this set:** I wanted the standard protection a real product uses,
+and I wanted to learn what each part does.
+
+---
+
+## Decision 13: How the Nucleo connects to the PCB (decided Oct 29)
+
+**What:** design the PCB so the Nucleo **plugs in** (sockets on the PCB that
+match the Nucleo's header pins). If that makes the board too big or awkward, the
+same signals also go to a plain header, so I can use wires between the Nucleo and
+the PCB instead.
+
+**Size (estimate, to check in KiCad):** the Nucleo-144 is about 5.25 x 2.75 in
+(133 x 70 mm; check ST's UM1974). A board it stacks on needs to be at least that
+big. A side-by-side board with wires could be about 3 x 4 in or smaller.
+
+**Why I chose "plug in, with a header and wires as a backup":** I want the
+finished turret to look clean, but a Nucleo is large and I do not want one
+choice to block the whole board. Both options use the same pins.
+
+---
+
 ## Still open (not decided)
 
-1. **5 V module for the Pi:** Pololu vs AliExpress. Revisit about Oct 24, and it
-   must be settled before the PCB layout starts. Target: connector and 5 V module settled by Oct 24, board design finished and ordered Oct 30.
+1. **5 V module for the Pi:** Pololu vs AliExpress. Lean toward Pololu, not
+   confirmed. It must be settled before the PCB layout is final. Target: board design finished and ordered Oct 30.
 2. **YOLO fine-tune vs from-scratch network.** Parked for now. Note the project
    rule says "self-trained, not pretrained". Fine-tuning a small YOLO on our own
    photos is the practical route; training a tiny network from scratch is a

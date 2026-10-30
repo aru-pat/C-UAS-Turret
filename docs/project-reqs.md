@@ -1,6 +1,6 @@
 # Counter-UAS Turret — Project requirements (Semester 1)
 
-Last updated: Oct 24, 2026
+Last updated: Oct 29, 2026
 The reasoning behind each choice is in `design-decisions.md`. Parts, links, prices
 and order dates are in `turret_bom.xlsx`.
 
@@ -40,8 +40,8 @@ lock-on indicator.
   training and the final build. Runs the neural net and decides "lock on".
   Coral accelerator is **optional and pinned** (decide at P2 after measuring the
   Pi alone).
-- **Motor brain:** **STM32G474** on a **Nucleo-G474RE** that plugs into my
-  custom carrier PCB. Sends step/direction pulses to two closed-loop motor
+- **Motor brain:** **STM32 Nucleo** (now the ECE-loan Nucleo-144 F746ZG;
+  the G474RE is an optional buy) that plugs into my custom carrier PCB. Sends step/direction pulses to two closed-loop motor
   kits, switches the laser, and the PCB handles power distribution.
 - **Motors:** two **BIGTREETECH S42C V1.1** closed-loop stepper kits (motor,
   driver and encoder in one), run at **12 V** (PCB parts rated for 24 V as an
