@@ -285,6 +285,14 @@ suitable for a Pi 5. It would also need the `usb_max_current_enable=1` setting.
 Not a fit for a module that plugs into the board. Look for a bare module with pins
 or screw terminals, input range up to 24 V or more, and 5 A continuous.
 
+**Option D checked Oct 30 (Amazon, BINZET potted block with wire leads, 8-40 V in,
+5 V 5 A, about $9.78).** It has wires, not pins, so on the PCB it would go through
+screw terminals instead of a socket. The 5 A version shows delivery Nov 18 - Dec 13,
+which is too late for the order. The 10 A version (about $9.98) shows Oct 31.
+Reviews are mostly good, with a few saying it gives less current than rated.
+A possible backup, not a first choice. A screw-terminal footprint on the PCB would
+let me swap any module in later.
+
 **Pi, camera and Nucleo (Oct 30):** the 5 V rail feeds the Pi (and the laser). The
 Pi powers the Arducam and the Nucleo over USB. The Nucleo is not on the 5 V rail.
 
