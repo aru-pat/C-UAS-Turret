@@ -1,0 +1,55 @@
+# The one place to change project-wide settings.
+# Every script reads this, so you rarely touch the code itself.
+
+project:
+  name: c-uas-turret-vision
+  target: drone            # Semester 1 target. (Was 'hand' as a stand-in.)
+
+# Classes the detector learns. One class is plenty for aiming a turret.
+# To add a class later (e.g. 'bird' as a hard negative class), add it here.
+classes:
+  - drone
+
+# Camera (Decision #9: Arducam 1080p HDR autofocus USB, 78 deg FOV).
+# MJPG is REQUIRED over USB 2 for 1080p30 — uncompressed is only a few fps.
+camera:
+  index: 0                 # /dev/video0 on Linux; 0 on most laptops
+  width: 1920
+  height: 1080
+  fps: 30
+  fourcc: MJPG             # must be MJPG, not YUYV, for 1080p30
+
+# Where data lives. Relative to the vision/ directory.
+paths:
+  raw_clips: data/raw_clips     # recorded videos (gitignored — big/binary)
+  frames: data/frames           # extracted frames (gitignored)
+  labels: data/labels           # YOLO .txt label files (one per frame)
+  clip_log: data/clips.csv      # the condition log, one row per clip
+  dataset: data/dataset         # the built train/val/test layout + yaml
+  runs: experiments/runs        # training outputs (gitignored)
+
+# How to turn clips into frames.
+extract:
+  every_n_frames: 10       # sample 1 of every N frames (clips are redundant)
+  max_per_clip: 150        # cap so one long clip doesn't dominate the dataset
+
+# Clip-aware split. Fractions are over CLIPS, not frames (prevents leakage).
+split:
+  train: 0.70
+  val: 0.20
+  test: 0.10
+  seed: 42                 # fixed so the split is reproducible
+
+# Training defaults (fine-tuning a small pretrained YOLO).
+train:
+  model: yolo11n.pt        # nano = small/fast, good for the Pi. Pretrained start.
+  epochs: 80
+  imgsz: 960               # bigger than default 640 — drones are small objects
+  batch: 16                # lower if your laptop/Colab runs out of memory
+  patience: 20             # early-stop if val stops improving
+
+# Live detection + the (future) fire decision.
+detect:
+  conf_threshold: 0.50     # fire only above this. Tuned later (Decision #3).
+                           # For a laser turret, bias HIGH: a false fire is
+                           # worse than a missed detection.

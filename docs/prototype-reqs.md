@@ -1,6 +1,6 @@
 # Prototype requirements
 
-Last updated: Oct 17, 2026
+Last updated: Oct 23, 2026
 
 ## Prototype 1 — Parts move, AI sees (Window A, Oct 16 – Nov 2)
 
@@ -18,17 +18,19 @@ Last updated: Oct 17, 2026
 **Vision half**
 - [ ] Arducam USB camera arrives; confirm MJPG 1920x1080 at 30 fps is listed
       (`v4l2-ctl --list-formats-ext` or OBS); return it if not; measure the case
-- [ ] Collect hand photos **with this camera**: different lighting, angles,
-      backgrounds, plus non-hand objects (a small starter set; the main dataset
-      comes after I commit to the final camera)
+- [ ] Collect drone footage/photos **with this camera**: different lighting,
+      angles, distances and backgrounds, plus non-drone objects (e.g. birds,
+      clutter). Film in clips and log each clip's conditions. Start with close/
+      bench range in the hangar (Stage 1), reaching into in-hangar flight
+      (Stage 2) as time allows
 - [ ] Train detection model v1 on the laptop or Colab
-- [ ] Model detects a hand in live video, reports a confidence score
+- [ ] Model detects a drone in live video, reports a confidence score
 
 **Laser (in Prototype 1)**
 - [ ] Laser module wired through the logic-level MOSFET to the Nucleo
 - [ ] Laptop runs the model and sends one message over USB serial; the Nucleo
-      switches the laser on when confidence is high (target: wall or paper only,
-      never at people)
+      switches the laser on when a drone is detected with high confidence
+      (target: wall or paper only, never at people)
 
 **Mechanical**
 - [ ] Pan-tilt frame and camera holder designed (CAD) and printed; screws chosen
@@ -65,7 +67,8 @@ Matches the full project requirements:
 - [ ] PCB powers the Pi through the 5 V module only after the board has been
       tested and trusted
 - [ ] Pan-tilt motors on custom PCB control (final, not breadboard)
-- [ ] Self-trained neural network running (not pretrained, not threshold-only)
+- [ ] Self-trained detector running: a small YOLO fine-tuned on our own drone
+      data (not threshold-only)
 - [ ] Classical CV tracking between AI checks
 - [ ] Laser fires only above the confidence threshold (threshold chosen during
       P2/P3)

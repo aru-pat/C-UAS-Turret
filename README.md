@@ -1,8 +1,9 @@
 # C-UAS-Turret
 
-A pan-tilt turret that detects and tracks a target with a self-trained neural
-network and fires a low-power laser lock-on indicator. Semester 1 target: hand
-detection; semester 2: mount on a drone.
+A pan-tilt turret that detects and tracks a drone with a self-trained neural
+network and fires a low-power laser lock-on indicator. Semester 1: ground-based
+turret detecting and tracking drones; semester 2: mount the system on a drone
+platform.
 
 Docs (in `docs/`):
 - `project-reqs.md` — what the project must do, hardware split, budget

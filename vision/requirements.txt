@@ -1,0 +1,17 @@
+# Install on your laptop / Colab, not the Pi.
+#   python -m pip install -r requirements.txt
+#
+# Versions are left open on purpose for now; pin them once your setup works
+# (write the exact versions into experiments/log.md so runs are reproducible).
+
+ultralytics        # YOLO training + inference (pulls in torch, torchvision)
+opencv-python      # camera capture, frame extraction, live display
+pyyaml             # read configs/drone.yaml
+numpy
+pandas             # read/write the clip log (data/clips.csv)
+tqdm               # progress bars
+matplotlib         # plotting metrics / dataset-size curves
+
+# For talking to the STM32 over serial in live_detect (the P1 fire signal).
+# Harmless to install now even though the hardware comes later.
+pyserial
