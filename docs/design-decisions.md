@@ -47,7 +47,7 @@ Prototype 1 stays in the finished turret.
 
 ## Decision 1: The motor brain is an STM32 on a Nucleo (not an ESP32)
 
-**Updated Oct 29:** Prototype 1 runs on the **Nucleo-144 STM32F746ZG** that I
+**Updated Oct 29:** Prototype 1 runs on the **Nucleo-144 STM32F767ZI** that I
 borrowed from the Purdue ECE shop (a loan: it goes back). The **NUCLEO-G474RE**
 below is now only an optional buy, in case the shop wants its board back before
 Dec 12. The code is Arduino-style or ST's own tools, so it carries over between

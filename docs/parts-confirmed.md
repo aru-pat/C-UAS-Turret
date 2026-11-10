@@ -13,8 +13,8 @@ disagrees with this one, ask Aru. Last updated: Nov 9, 2026.
 | Adapter plug | About 5.5 x 2.1 mm (ruler said about 5 mm outer, inner not measurable). Fits the lab DC jack. | Ruler and fit, Nov 9 |
 | Fuses | AKOSN automotive blade kit, ATC/ATO standard size, all rated 32 V, 2 A to 40 A | Photo of box, Nov 9 |
 | Microcontroller board | ECE-shop loan, Nucleo-144 form factor (returns to ECE at end of semester) | Case label and board |
-| Nucleo exact model | UNCONFIRMED. Case label says STM32F746ZG. Board's own label looks like NUCLEO-F767ZI. Case photo shows a generic F413ZH picture. | Needs a close-up of the board label and chip text |
-| Nucleo size | 144 pin family: same Morpho and ZIO headers on F746ZG, F767ZI and F413ZH | ST Nucleo-144 family |
+| Nucleo exact model | **STM32F767ZIT6** on a NUCLEO-F767ZI. The Purdue case label says F746ZG, but the chip on the board is what counts. | Aru read the chip marking, Nov 9 |
+| Nucleo size | 144 pin family: same Morpho and ZIO headers across the family | ST Nucleo-144 family |
 
 Why the Nucleo model matters little for the PCB: all Nucleo-144 boards share
 the same header layout, so the carrier PCB footprint is the same. It matters
