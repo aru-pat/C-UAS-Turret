@@ -554,6 +554,19 @@ choice to block the whole board. Both options use the same pins.
 
 ---
 
+## Decision 14: PCB schematic choices (decided Nov 10-11)
+
+| Choice | What I picked | Why I chose it |
+|---|---|---|
+| Layers and fab | 2 layers, 1 oz, JLCPCB | Cheap and fast. Bottom layer is one big ground sheet to keep motor noise down. |
+| 12 V adapter | 12 V, 8 A or more, 5.5 x 2.5 mm plug | My worst case is 5.62 A (7.0 A with margin). A 5 A adapter is not enough. See `pcb-calculations.md`. |
+| Barrel jack | 5.5 x 2.5 mm, rated 8 A | Most 5.5 x 2.1 mm jacks are only 6 A, below my 7.5 A fuse. |
+| Fuse | 7.5 A blade fuse in a PCB blade holder | Above my 5.62 A load / 0.8, below the 8 A jack. Replaces the old "15 A final" plan. |
+| TVS | SMCJ15CA (two-way) | Same specs as SMCJ15A, and it cannot be soldered backwards. |
+| 5 V to the Pi | GPIO pins (2 x 5 V, 2 x GND) with a ferrite bead, caps and a 5 V TVS (SMAJ5.0CA) | One less cable in the electronics bay. The TVS replaces the protection the Pi skips on GPIO power. Needs `usb_max_current_enable=1`. Never plug USB-C power in at the same time. |
+| Nucleo mounting | Sockets on Zio CN7 and CN10, plus 2 standoffs on the free side | Just as steady as extra sockets, cheaper, nothing to misalign. |
+| Nucleo pins | STEP1 D6/PE9 (TIM1_CH1), DIR1 D7/PF13, EN1 D4/PF14, STEP2 D9/PD15 (TIM4_CH4), DIR2 D8/PF12, EN2 D10/PD14, LASER_CTRL D3/PE13 | STEP pins on two different timers so each motor runs its own speed. Pins from ST UM1974 (F767ZI table). |
+
 ## Still open (not decided)
 
 1. **5 V module for the Pi:** Pololu vs AliExpress (the sealed Amazon USB-C module
