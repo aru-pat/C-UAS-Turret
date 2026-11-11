@@ -19,3 +19,12 @@ disagrees with this one, ask Aru. Last updated: Nov 9, 2026.
 Why the Nucleo model matters little for the PCB: all Nucleo-144 boards share
 the same header layout, so the carrier PCB footprint is the same. It matters
 for firmware (timer and pin choices), so confirm before writing code.
+
+## ECE shop loans
+Nucleo-144 (NUCLEO-F767ZI), the Neewer 12 V 3 A adapter, USB cables, pin
+headers and two transistors all go back to the ECE shop at the **end of the
+semester**. That is after the Dec 12 demo, so no replacement board is needed.
+Last updated: Nov 10, 2026.
+
+## Orders
+- Raspberry Pi 5: the only purchase planned for Nov 10.
