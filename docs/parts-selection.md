@@ -6,15 +6,17 @@ Work done unattended overnight, 2026-11-11 (all times UTC).
 
 ## Needs Aru
 
-1. **Q1 stock.** The datasheet-checked lead, Vishay SUD50P04-08-GE3, still has no Digi-Key, Mouser or Arrow stock (Octopart, 13:37). Only Future has 4,000, sold as 2,000-piece reels. The footprint `cuas:SUD50P04-08` is a standard DPAK (G-D-S, drain on tab), so any DPAK P-FET with the same pinout drops in.
-   - Infineon IPD50P04P413ATMA2, same footprint (Octopart, 13:37):
-     - Mouser 726-IPD50P04P413ATM: 9,349 at $1.74
-     - Newark: 5,448 cut tape at $1.74
-     - Arrow: 1,847 at $1.395
-     - No Digi-Key row.
-     - I could not open its datasheet, so check Vgs max and pin order before ordering.
-   - Diodes DMP3013SFV-7: Digi-Key DMP3013SFV-7DICT-ND, 25,059 at $1.00 (13:37, unchanged). It needs `Package_SON:Diodes_PowerDI3333-8` and the `Transistor_FET:DMP3013SFV` symbol in place of Device:Q_PMOS, which is a schematic edit I did not make.
-   - **Recommendation:** keep the DPAK layout and buy IPD50P04P413ATMA2 from Mouser or Newark, after a 2-minute check of its datasheet's first page for Vgs ±20 V, Rds(on) under 15.8 mΩ at -10 V, and G-D-S pinout. Switch to DMP3013SFV-7 only if you need Q1 from Digi-Key in the same order.
+1. **Q1 part.** Vishay SUD50P04-08-GE3 still has no Digi-Key, Mouser or Arrow stock (Octopart, 2026-11-11 13:37). Only Future has 4,000, sold as 2,000-piece reels.
+   - **Infineon IPD50P04P413ATMA2 is now checked against its datasheet** (Infineon IPD50P04P4-13 Rev 1.0, 2011-03-14, read 2026-11-12 13:37 from Farnell's copy because infineon.com served no PDF):
+     - Vds -40 V; Vgs ±20 V; Id -50 A at Tc 25 °C (p.1).
+     - Rds(on) 9.2 mΩ typ, 12.6 mΩ max at Vgs -10 V, Id -50 A (p.2). That's under your 15.8 mΩ limit. The datasheet gives no -4.5 V value, which you don't need.
+     - Vgs(th) -2.0 to -4.0 V (p.2). Your zener and 100 kΩ circuit gives about -12 V, well past that.
+     - RthJC 2.6 K/W; RthJA 40 K/W on 6 cm² of copper, or 62 K/W on a minimal footprint (p.2-3).
+     - Pins: gate pin 1, drain pin 2 and tab, source pin 3, package PG-TO252-3-313 (p.1). This matches `cuas:SUD50P04-08` (pad G at pin 1, D on the tab, S at pin 3).
+     - Loss: 0.40 W at 5.62 A at 12.6 mΩ, and about 0.6 W hot. Give the drain tab about 6 cm² of copper.
+   - Stock (Octopart, 2026-11-11 13:37): Mouser 726-IPD50P04P413ATM 9,349 at $1.74; Newark 5,448 cut tape at $1.74; Arrow 1,847 at $1.395. No Digi-Key row.
+   - The only Q1 option Digi-Key stocks is Diodes DMP3013SFV-7 (DMP3013SFV-7DICT-ND, 25,059 at $1.00). It needs `Package_SON:Diodes_PowerDI3333-8` and the `Transistor_FET:DMP3013SFV` symbol, which is a schematic edit I did not make.
+   - **Recommendation:** make IPD50P04P413ATMA2 the Q1 part on the existing DPAK footprint and buy it from Mouser or Newark. It needs no layout or schematic change.
 2. **Barrel jack lead changed.** I made Same Sky PJ-063BH (5.5x2.5, 8 A, 24 V) the lead instead of Tensility 54-00167. Its datasheet drawing (p.2) matches KiCad's built-in `Connector_BarrelJack:BarrelJack_CUI_PJ-063AH_Horizontal` exactly. I could not get Tensility's drawing, so the 54-00167 would need a hand-made footprint built from a drawing I haven't seen. The Tensility part stays as the backup. 24 V is enough for a 12 V rail.
    - **Recommendation:** sign off on PJ-063BH. It's verified against its own drawing, it's in stock at Digi-Key, and it needs no hand-made footprint.
 3. **Wrong footprints in the schematic now.** These are leftovers to overwrite when you assign footprints: J1 = QFN-40, F1 = PLCC-84, Q1 = TQFP-44, J6/J7 = speakON. All the others are blank.
@@ -42,7 +44,7 @@ Price is unit price at qty 1 unless noted. "n/r" = not read. Lead time: none of 
 | XT60 input (DNP) | J2 | AMASS XT60PW-M | n/r | n/r | not ordered | n/a | Connector_AMASS:AMASS_XT60PW-M_1x02_P7.20mm_Horizontal | Name confirmed in KiCad 10.0.6. Male on the board, female on the source cable. | XT60PW-F (Connector_AMASS:AMASS_XT60PW-F_1x02_P7.20mm_Horizontal) |
 | Fuse holder | F1 | Littelfuse 178.6165.0002 | WK6265-ND | $5.72 | 13,448 (Digi-Key via Octopart, 05:42) | in stock | Fuse:FuseHolder_Blade_ATO_Littelfuse_FLR_178.6165 | 30 A, 80 V, PCB through-hole, ATO/ATC blade. KiCad footprint is made for this exact part: 8 pads, drill 1.4 on 2.2 mm pads, side 1 at x 0/3.5, side 2 at x 9.3/12.8, NPTH 2.4 at (6.4,1.25). I could not open Littelfuse's drawing to re-measure it. | Keystone 3557-2 (36-3557-2-ND, 186,343, $1.31, 05:42); no KiCad footprint |
 | Fuse 7.5 A | F1 insert | Eaton Bussmann ATC-7-1/2 | n/r | $5.14 | 1,215 (Mouser 504-ATC-7-1/2-2) | in stock | (goes in F1) | 7.5 A, 32 V ATC blade, Production. | Any 7.5 A ATC/ATO from your AKOSN kit (Littelfuse 0257007.5PXPV is obsolete) |
-| Reverse-polarity P-FET | Q1 | Vishay SUD50P04-08-GE3 | none listed | n/r | 0 at Digi-Key, Mouser, Arrow; Future 4,000 at $2.73 on reel (Octopart, 06:36 and 13:37) | see Needs Aru 1 | cuas:SUD50P04-08 (TO-252-2, pads G/D/S) | Datasheet p.1-2: Vds -40 V, Vgs ±20 V, Rds(on) 8.1 mΩ max at -10 V, 11.7 mΩ at -4.5 V, Id -50 A (Tc), RthJA 50 °C/W on 1 in² copper. Pin 1 G, 2 D (tab), 3 S. | Infineon IPD50P04P413ATMA2, same DPAK footprint (Mouser 726-IPD50P04P413ATM, 9,349, $1.74; Newark 5,448; Arrow 1,847 at $1.395; 13:37) |
+| Reverse-polarity P-FET | Q1 | Infineon IPD50P04P413ATMA2 | none listed | $1.74 | 9,349 (Mouser 726-IPD50P04P413ATM); Newark 5,448; Arrow 1,847 at $1.395 (Octopart, 2026-11-11 13:37) | in stock | cuas:SUD50P04-08 (TO-252, pads G/D/S) | Infineon datasheet Rev 1.0 (Farnell copy): Vds -40 V, Vgs ±20 V, Id -50 A (p.1); Rds(on) 12.6 mΩ max at -10 V (p.2); Vgs(th) -2 to -4 V (p.2); RthJA 40 K/W on 6 cm² (p.2-3). Pin 1 G, 2/tab D, 3 S (p.1). | Vishay SUD50P04-08-GE3, same footprint (8.1 mΩ max, ±20 V, datasheet p.1-2); stock only on Future reels |
 | Q1 gate zener | D1 | onsemi MMSZ5245BT1G | MMSZ5245BT1GOSCT-ND | $0.17 | 64,495 (Digi-Key via Octopart, 05:45) | in stock | Diode_SMD:D_SOD-123 | Datasheet p.3: Vz 14.25/15/15.75 V at 8.5 mA, 500 mW, SOD-123, cathode = pin 1 = KiCad pad 1 = D_Zener K. | Diodes MMSZ5245B-7-F (MMSZ5245B-FDICT-ND, 324, $0.21, 05:45) |
 | Q1 gate pull-down | R1 | Stackpole RMCF0805FT100K | n/r | ~$0.003 (Avnet reel price) | 40,000 (Avnet, ~06:44) | in stock | Resistor_SMD:R_0805_2012Metric | 100 kΩ 1% 0.125 W 0805. | Yageo RC0805FR-07100KL (Newark 94,627, $0.101) |
 | 12 V TVS | D2 | Littelfuse SMCJ15CA | n/r | $0.321 | 1,715 (Arrow via Octopart) | in stock | Diode_SMD:D_SMC | Datasheet p.2: Vrwm 15 V, Vbr 16.7-18.5 V, Vc 24.4 V at 61.5 A, 1500 W, DO-214AB, bidirectional (no polarity). | Vishay SMCJ15CA-E3/57T (Arrow 205, $0.367) |
@@ -75,7 +77,7 @@ Price is unit price at qty 1 unless noted. "n/r" = not read. Lead time: none of 
 - **J2 XT60PW-M:** your spec. It's the KiCad-library part, left unpopulated.
 - **F1 Littelfuse 178.6165.0002:** rated 30 A, so a 7.5 A fuse is never near its limit, and KiCad has a footprint made for exactly this holder.
 - **Fuse ATC-7-1/2:** a current-production 7.5 A blade. Any 7.5 A ATC/ATO from your kit works too.
-- **Q1 SUD50P04-08:** 8.1 mΩ is about half your 15.8 mΩ limit. At 7 A it loses about 0.4 W (0.6 W if hot), and a DPAK tab on 1 in² of copper sheds that. Stock is the problem, so see Needs Aru 1.
+- **Q1 IPD50P04P413ATMA2:** 12.6 mΩ max meets your 15.8 mΩ limit. It's AEC-Q101, rated for 175 °C, and actually in stock. At 5.62 A it loses about 0.4 W, and a DPAK tab on 6 cm² of copper sheds that. The Vishay SUD50P04-08 has lower resistance but you can only buy it by the reel.
 - **D1 MMSZ5245BT1G:** the standard 15 V SOD-123 zener, from a big stock.
 - **D2 SMCJ15CA:** 15 V standoff sits just above the 12 V rail, and 1500 W absorbs hot-plug spikes.
 - **C1 EEU-FR1V102:** low ESR, 2.6 A ripple, and 35 V gives margin on 12 V.
