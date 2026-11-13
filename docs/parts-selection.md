@@ -14,8 +14,9 @@ Work done unattended overnight, 2026-11-11 (all times UTC).
 | Q2 laser FET | **Buy my own IRLU024N** (the ECE one is a loan I must return) | Can't return a part that is soldered in. |
 | 7.5 A fuse | Use my AKOSN kit | Already own it. |
 | Pi and laser cables | Pre-crimped JST XH cables (no crimp tool) | XH crimps need a special tool I don't have. |
-| 12 V adapter | **Open:** I am picking a cheaper 12 V 8 A+, 5.5 x 2.5 mm, center-positive one on Amazon | GlobTek at $54 is too much. |
 | Shipping | Ground | The board is not ordered yet, so parts are not needed faster. |
+| Status LEDs D3-D5 | **Red**: Kingbright APT2012LSECK/J3-PRV (Digi-Key 754-1935-1-ND), 0805, 1.8 V at 2 mA. Same footprint `LED_SMD:LED_0805_2012Metric`; resistors stay 4.7k / 1.5k / 1.5k (about 2.2 mA each) | I want red LEDs. |
+| 12 V adapter | Amazon YOOFONE 12 V 8 A 96 W, 5.5 x 2.5 mm, center positive (ASIN B0DPZXBCJ3, $12.39) | Meets spec at a quarter of the GlobTek price; plug size confirmed on the listing photo. |
 | Nucleo CN7 offset / standoff height | No calipers and no Nucleo right now: use the inferred 1.016 mm offset; do a 1:1 paper print fit test when I have the Nucleo, before the JLCPCB order; buy an M3 standoff assortment and pick the height at build time | Paper test needs no tools. |
 
 ## Needs Aru (overnight notes)
