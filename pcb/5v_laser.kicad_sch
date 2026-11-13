@@ -2,7 +2,7 @@
 	(version 20260306)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid "6cd10a0b-4341-4818-9f6b-625802718c94")
+	(uuid "444fe90b-e70e-4a43-9cfe-9c19e5551d0c")
 	(paper "A4")
 	(title_block
 		(title "5V Laser")
@@ -3231,7 +3231,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 215.646 122.174 90)
 			(hide yes)
 			(show_name no)
@@ -3537,7 +3537,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "LED"
+		(property "Value" "Green"
 			(at 123.19 112.0774 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3548,7 +3548,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
 			(at 119.38 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -3641,7 +3641,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 107.696 101.854 90)
 			(hide yes)
 			(show_name no)
@@ -3721,7 +3721,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 207.264 117.094 90)
 			(hide yes)
 			(show_name no)
@@ -3959,7 +3959,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 213.0552 97.79 0)
 			(hide yes)
 			(show_name no)
@@ -4039,7 +4039,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical"
 			(at 168.91 119.38 0)
 			(hide yes)
 			(show_name no)
@@ -4188,7 +4188,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "LED"
+		(property "Value" "Green"
 			(at 110.49 112.0774 90)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4199,7 +4199,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
 			(at 106.68 109.22 0)
 			(hide yes)
 			(show_name no)
@@ -4244,10 +4244,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "16721cb0-20a9-49a8-991c-a2b9162161fe")
+			(uuid "16721cb0-20a9-49a8-991c-a2b9162161ff")
 		)
 		(pin "1"
-			(uuid "6de96a58-81c3-474f-a784-9566e4564f7c")
+			(uuid "6de96a58-81c3-474f-a784-9566e4564f7d")
 		)
 		(instances
 			(project "C-UAS-Turret"
@@ -4266,7 +4266,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6e7bfa6f-23ac-4738-94d0-6f8d696626ec")
@@ -4292,7 +4292,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 138.43 120.65 0)
 			(hide yes)
 			(show_name no)
@@ -4501,7 +4501,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "89ce9af4-82f5-4564-b5f9-98f227f8be8a")
@@ -4527,7 +4527,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 119.38 101.6 0)
 			(hide yes)
 			(show_name no)
@@ -4595,7 +4595,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "BLM31SN500SZ1L"
 			(at 172.72 95.1991 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4606,7 +4606,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Inductor_SMD:L_1206_3216Metric"
 			(at 167.132 93.98 90)
 			(hide yes)
 			(show_name no)
@@ -4688,7 +4688,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical"
 			(at 149.86 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -4753,7 +4753,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b92f8f8c-eb61-4560-a97a-cf801b9c3b38")
@@ -4779,7 +4779,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_THTPad_D2.0mm_Drill1.0mm"
 			(at 148.59 113.03 0)
 			(hide yes)
 			(show_name no)
@@ -4926,7 +4926,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x04"
+		(property "Value" "5V_PI"
 			(at 152.4 118.1099 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4937,7 +4937,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical"
 			(at 149.86 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -5025,7 +5025,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "cuas:IRLU024N"
 			(at 229.87 115.57 0)
 			(hide yes)
 			(show_name no)
@@ -5189,7 +5189,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Diode_SMD:D_SMA"
 			(at 229.87 93.98 0)
 			(hide yes)
 			(show_name no)
@@ -5271,7 +5271,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
 			(at 120.396 101.854 90)
 			(hide yes)
 			(show_name no)
@@ -5305,10 +5305,10 @@
 			)
 		)
 		(pin "2"
-			(uuid "8ef7ef3c-a9e7-455b-b1b0-178e122a919d")
+			(uuid "8ef7ef3c-a9e7-455b-b1b0-178e122a919e")
 		)
 		(pin "1"
-			(uuid "94780c39-0d68-4fb6-a3bb-172f3c15d38d")
+			(uuid "94780c39-0d68-4fb6-a3bb-172f3c15d38e")
 		)
 		(instances
 			(project "C-UAS-Turret"
@@ -5589,7 +5589,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm"
 			(at 191.4652 97.79 0)
 			(hide yes)
 			(show_name no)

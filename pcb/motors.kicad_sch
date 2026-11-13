@@ -2,7 +2,7 @@
 	(version 20260306)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid "b8f71e78-aa95-4883-9442-a01e70a84e48")
+	(uuid "addf649c-1fdc-48d2-ae33-89dd053d1018")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_01x06"
@@ -760,7 +760,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_Audio:Jack_speakON-6.35mm_Neutrik_NLJ2MDXX-H_Horizontal"
+		(property "Footprint" "Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical"
 			(at 148.59 82.55 0)
 			(hide yes)
 			(show_name no)
@@ -1012,7 +1012,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_Audio:Jack_speakON-6.35mm_Neutrik_NLJ2MDXX-H_Horizontal"
+		(property "Footprint" "Connector_JST:JST_XH_B6B-XH-A_1x06_P2.50mm_Vertical"
 			(at 124.46 82.55 0)
 			(hide yes)
 			(show_name no)
