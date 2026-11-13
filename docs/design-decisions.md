@@ -587,7 +587,7 @@ choice to block the whole board. Both options use the same pins.
 6. **Friend's funding and role.** A friend may help fund the project in exchange
    for a resume credit. The role split and who keeps the hardware are not
    defined yet; agree on them so each person's resume claim is honest.
-7. **Overall budget.** The original ~$370 target is no longer binding. The BOM
+7. **Overall budget: about $500** (updated Nov 12, 2026; the original ~$370 target is retired). The BOM
    currently counts about **$540 without optional items** and about **$733 with
    the battery set and Coral**. Real prices will shift as we order.
 

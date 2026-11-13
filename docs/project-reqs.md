@@ -26,8 +26,8 @@ lock-on indicator.
 - Anything aimed at people
 
 ## Budget
-- Original target: about $370 (Tier 2). **No longer binding**: a friend may help
-  fund the build in exchange for a resume credit (role split still to be agreed).
+- **Budget: about $500** (updated Nov 12, 2026; the original ~$370 target is retired).
+  A friend may help fund the build in exchange for a resume credit (role split still to be agreed).
 - Current BOM (counted rows, incl. $80 shipping/tax/China/unknowns allowances):
   **about $530** without optional items, **about $722** with the optional
   battery set and Coral.
