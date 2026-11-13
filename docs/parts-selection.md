@@ -4,7 +4,21 @@ Branch `pcb-parts`, made from `docs/design-decisions` at 98e0ee4 ("Add PCB schem
 KiCad 10.0.6. 2-layer, 1 oz, JLCPCB. Worst case 5.62 A at 12 V (7.0 A with margin).
 Work done unattended overnight, 2026-11-11 (all times UTC).
 
-## Needs Aru
+## Aru's decisions (Nov 12, 2026) — these override the "Needs Aru" list below
+
+| Item | Decision | Why I chose it |
+|---|---|---|
+| Q1 reverse-guard P-FET | **Diodes DMP3013SFV-7** (Digi-Key DMP3013SFV-7DICT-ND, $1.00). 9.5 mOhm max at -10 V, Vgs +/-25 V, -30 V. Symbol `Transistor_FET:DMP3013SFV`, footprint `Package_SON:Diodes_PowerDI3333-8`. Swap the symbol in the schematic (same G/D/S wiring). | Everything ships in one Digi-Key cart. Give the drain pads a big copper area. |
+| Barrel jack J1 | **Same Sky PJ-063BH** (CP-063BH-ND) on `Connector_BarrelJack:BarrelJack_CUI_PJ-063AH_Horizontal` | Matches KiCad's built-in footprint, 8 A. |
+| Pololu D24V50F5 | **Buy 1** (the board holds one) | Grokbot's qty 2 was a default guess. |
+| Q2 laser FET | **Buy my own IRLU024N** (the ECE one is a loan I must return) | Can't return a part that is soldered in. |
+| 7.5 A fuse | Use my AKOSN kit | Already own it. |
+| Pi and laser cables | Pre-crimped JST XH cables (no crimp tool) | XH crimps need a special tool I don't have. |
+| 12 V adapter | **Open:** I am picking a cheaper 12 V 8 A+, 5.5 x 2.5 mm, center-positive one on Amazon | GlobTek at $54 is too much. |
+| Shipping | Ground | The board is not ordered yet, so parts are not needed faster. |
+| Nucleo CN7 offset / standoff height | No calipers and no Nucleo right now: use the inferred 1.016 mm offset; do a 1:1 paper print fit test when I have the Nucleo, before the JLCPCB order; buy an M3 standoff assortment and pick the height at build time | Paper test needs no tools. |
+
+## Needs Aru (overnight notes)
 
 1. **Q1 part.** Vishay SUD50P04-08-GE3 still has no Digi-Key, Mouser or Arrow stock (Octopart, 2026-11-11 13:37). Only Future has 4,000, sold as 2,000-piece reels.
    - **Infineon IPD50P04P413ATMA2 is now checked against its datasheet** (Infineon IPD50P04P4-13 Rev 1.0, 2011-03-14, read 2026-11-12 13:37 from Farnell's copy because infineon.com served no PDF):
